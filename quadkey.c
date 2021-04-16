@@ -842,7 +842,7 @@ static PyObject*
 lonlat2quadint_py(PyObject* self, PyObject* args)
 {
     double lon, lat;
-    int zoom
+    int zoom;
 
     if (!PyArg_ParseTuple(args, "dd", &lon, &lat, &zoom))
         return NULL;
