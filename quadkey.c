@@ -221,10 +221,10 @@ webmercator2xy(double wm_x, double wm_y, uint32* x, uint32* y)
 }
 
 static uint64
-lonlat2quadint(double lon, double lat)
+lonlat2quadint(double lon, double lat, int zoom)
 {
     uint32 x, y;
-    lonlat2xy(lon, lat, MAX_ZOOM, &x, &y);
+    lonlat2xy(lon, lat, zoom, &x, &y);
     return xy2quadint(x, y);
 }
 
@@ -842,11 +842,12 @@ static PyObject*
 lonlat2quadint_py(PyObject* self, PyObject* args)
 {
     double lon, lat;
+    int zoom
 
-    if (!PyArg_ParseTuple(args, "dd", &lon, &lat))
+    if (!PyArg_ParseTuple(args, "dd", &lon, &lat, &zoom))
         return NULL;
 
-    return Py_BuildValue("K", lonlat2quadint(lon, lat));
+    return Py_BuildValue("K", lonlat2quadint(lon, lat, zoom));
 }
 
 /*
